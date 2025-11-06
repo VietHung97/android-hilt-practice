@@ -1,6 +1,7 @@
 package com.frank.practicehilt.di
 
 import com.frank.practicehilt.common.Config
+import com.frank.practicehilt.data.apis.QuestionAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
     @Provides
-    @Singleton
+    @Singleton //ca ung dung
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -43,6 +44,8 @@ object NetworkModule {
 
     }
 
+    @Provides
+    @Singleton
     fun provideRetrofitStackOverFlow(
         okHttpClient: OkHttpClient, moshiConverterFactory: MoshiConverterFactory
     ): Retrofit {
@@ -51,5 +54,8 @@ object NetworkModule {
             .client(okHttpClient).build()
     }
 
-
+    @Provides
+    fun provideQuestionAPI(retrofit: Retrofit) : QuestionAPI {
+        return retrofit.create(QuestionAPI::class.java)
+    }
 }

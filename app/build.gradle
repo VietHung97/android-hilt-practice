@@ -32,6 +32,7 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-XXLanguage:+PropertyParamAnnotationDefaultTargetMode','-Xannotation-default-target=param-property']
     }
 
     buildFeatures{
