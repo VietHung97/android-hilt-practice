@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.frank.practicehilt.databinding.FragmentJsonPlaceHolderBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class JsonPlaceHolderFragment : Fragment() {
 
     private lateinit var dataBinding: FragmentJsonPlaceHolderBinding
