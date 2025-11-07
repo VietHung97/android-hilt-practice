@@ -18,7 +18,7 @@ class JsonPlaceHolderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModel.getAllPosts()
     }
 
     override fun onCreateView(

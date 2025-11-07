@@ -1,6 +1,7 @@
 package com.frank.practicehilt.di
 
 import com.frank.practicehilt.common.Config
+import com.frank.practicehilt.data.apis.PostAPI
 import com.frank.practicehilt.data.apis.QuestionAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -29,9 +30,6 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
-//        if (BuildConfig.DEBUG) {
-//            sandbox
-//        }
         builder.interceptors().add(httpLoggingInterceptor)
         return builder.build()
     }
@@ -46,16 +44,34 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @StackOverFlowSite
     fun provideRetrofitStackOverFlow(
         okHttpClient: OkHttpClient, moshiConverterFactory: MoshiConverterFactory
     ): Retrofit {
         return Retrofit.Builder().addConverterFactory(moshiConverterFactory)
-            .baseUrl(Config.StackOverFlowUrl)
-            .client(okHttpClient).build()
+            .baseUrl(Config.StackOverFlowUrl).client(okHttpClient).build()
     }
 
     @Provides
-    fun provideQuestionAPI(retrofit: Retrofit) : QuestionAPI {
+
+    fun provideQuestionAPI(@StackOverFlowSite retrofit: Retrofit): QuestionAPI {
         return retrofit.create(QuestionAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    @JsonPlaceHolderFlowSite
+    fun provideRetrofitJsonPlaceHolderPost(
+        okHttpClient: OkHttpClient, moshiConverterFactory: MoshiConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder().addConverterFactory(moshiConverterFactory)
+            .baseUrl(Config.JsonPlaceHolder).client(okHttpClient).build()
+    }
+
+    @Provides
+    fun providePostAPI(
+        @JsonPlaceHolderFlowSite retrofit: Retrofit
+    ): PostAPI {
+        return retrofit.create(PostAPI::class.java)
     }
 }

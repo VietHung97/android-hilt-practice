@@ -8,7 +8,7 @@ class QuestionLocalService @Inject constructor(private val questionDao: Question
 
 
     suspend fun deleteAllQuestion(){
-
+        questionDao.deleteAll()
     }
 
     suspend fun getAllQuestion(): List<QuestionEntity>{

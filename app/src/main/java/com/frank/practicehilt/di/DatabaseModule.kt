@@ -20,6 +20,8 @@ object DatabaseModule {
         return Room.databaseBuilder(appContext, AppDB::class.java, "app_db").build()
     }
 
+    @Singleton
+    @Provides
     fun provideQuestionDao(appDB: AppDB) : QuestionDao {
         return appDB.questionDao()
     }

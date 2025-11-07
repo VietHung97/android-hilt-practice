@@ -1,12 +1,14 @@
 package com.frank.practicehilt.base
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 
 open class BaseViewModel : ViewModel() {
 
-    protected val parentJob: Job? = null
+    protected var parentJob: Job? = null
 
     var isLoading = MutableLiveData(false)
     private set
@@ -15,6 +17,10 @@ open class BaseViewModel : ViewModel() {
         parentJob?.invokeOnCompletion {
             isLoading.postValue(false)
         }
+    }
+
+    protected  val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("Hung","Error: ${throwable.message}")
     }
 
 }

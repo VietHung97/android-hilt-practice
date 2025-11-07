@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.refresh()}"
-            android:text="Refresh"
+            android:text="@string/refresh"
             android:visibility="@{viewModel.isLoading() ? View.GONE : View.VISIBLE}" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="#333333"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
 
